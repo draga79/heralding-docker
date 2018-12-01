@@ -11,5 +11,5 @@ This Docker image will save its data on /heralding, so be sure to keep its conte
 To run it with all its ports mapped, launch with something like this
 
 ```bash
-$ docker run --rm -d -v /yourlogpath:/heralding -p 5900:5900 -p 80:80 -p443:443 -p 110:110 -p 143:143 -p 21:21 -p 993:993 -p 995:995 -p 25:25 -p 5432:5432 -p 23:23 -p 22:22 -p 1080:1080 dragas/heralding
+$ docker run --rm -d --name heralding -v /yourlogpath:/heralding -p 5900:5900 -p 80:80 -p 443:443 -p 110:110 -p 143:143 -p 21:21 -p 993:993 -p 995:995 -p 25:25 -p 5432:5432 -p 23:23 -p 22:22 -p 1080:1080 dragas/heralding
 ```
