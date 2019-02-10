@@ -1,4 +1,4 @@
-FROM alpine:3.8
+FROM alpine:3.9
 MAINTAINER Stefano Marinelli <stefano@dragas.it>
 
 RUN apk add --no-cache python3 python3-dev libffi-dev py3-cffi py3-zmq && apk add --no-cache --virtual .build-deps gcc musl-dev postgresql-dev postgresql-libs 
