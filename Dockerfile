@@ -1,8 +1,15 @@
-FROM alpine:3.12
-MAINTAINER Stefano Marinelli <stefano@dragas.it>
+FROM python:3.7-slim-stretch as base
 
-RUN apk add --no-cache python3 py3-pip python3-dev libffi-dev py3-cffi py3-pyzmq && apk add --no-cache --virtual .build-deps gcc musl-dev postgresql-dev postgresql-libs 
+COPY . .
+RUN apt-get update && apt-get install -y libpq-dev gcc \
+    && pip install --user --no-cache-dir -r requirements.txt
 
-RUN pip install --upgrade pip && pip3 install heralding && rm -Rf /root/.cache/ && mkdir /heralding
+RUN python setup.py install --user
 
-ENTRYPOINT cd /heralding && heralding
+FROM python:3.7-slim-stretch
+COPY --from=base /root/.local /root/.local
+
+ENV PATH=/root/.local/bin:$PATH
+
+CMD ["heralding" ]
+EXPOSE 21 22 23 25 80 110 143 443 993 995 1080 2222 3306 3389 5432 5900
